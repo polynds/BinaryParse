@@ -1,15 +1,21 @@
 {
-    "name": "polynds/binary-parse",
-    "autoload": {
-        "psr-4": {
-            "Polynds\\BinaryParse\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "kuangjian",
-            "email": "2910508410@qq.com"
-        }
-    ],
-    "require": {}
+  "name": "polynds/binary-parse",
+  "autoload": {
+    "psr-4": {
+      "Polynds\\BinaryParse\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "kuangjian",
+      "email": "2910508410@qq.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "phpstan/phpstan": "^1.0"
+  }
 }

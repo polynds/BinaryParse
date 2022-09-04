@@ -2,43 +2,43 @@
 
 declare(strict_types=1);
 /**
- * happy coding!!!
+ * happy coding.
  */
 namespace Polynds\BinaryParse;
 
 interface Unpackable
 {
-    public function readInt8();
+    public function readInt8(): int;
 
-    public function readUInt8();
+    public function readUInt8(): int;
 
-    public function readInt16();
+    public function readInt16(): int;
 
-    public function readUInt16(?ByteOrder $byteOrder = null);
+    public function readUInt16(?ByteOrder $byteOrder = null): int;
 
-    public function readInt64();
+    public function readInt64(): int;
 
-    public function readUInt64(?ByteOrder $byteOrder = null);
+    public function readUInt64(?ByteOrder $byteOrder = null): int;
 
-    public function readInt32();
+    public function readInt32(): int;
 
-    public function readUInt32(?ByteOrder $byteOrder = null);
+    public function readUInt32(?ByteOrder $byteOrder = null): int;
 
-    public function readLowHexStr(int $bit);
+    public function readLowHexStr(int $byte = Binary::UNSIGNED_CHAR_LENGTH): string;
 
-    public function readHighHexStr(int $bit);
+    public function readHighHexStr(int $byte = Binary::UNSIGNED_CHAR_LENGTH): string;
 
-    public function readFloat(?ByteOrder $byteOrder = null);
+    public function readFloat(?ByteOrder $byteOrder = null): float;
 
-    public function readDouble(?ByteOrder $byteOrder = null);
+    public function readDouble(?ByteOrder $byteOrder = null): float;
 
     /**
      * 以空格结尾的字符串.
      */
-    public function readSpacePaddedStr(int $length): string;
+    public function readSpacePaddedStr(int $byte): string;
 
     /**
      * 以\0结尾的字符串.
      */
-    public function readNULLPaddedStr(int $length): string;
+    public function readNULLPaddedStr(int $byte): string;
 }

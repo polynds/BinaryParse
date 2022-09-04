@@ -2,43 +2,43 @@
 
 declare(strict_types=1);
 /**
- * happy coding!!!
+ * happy coding.
  */
 namespace Polynds\BinaryParse;
 
 interface Packable
 {
-    public function writeInt8();
+    public function writeInt8(): string;
 
-    public function writeUInt8();
+    public function writeUInt8(): string;
 
-    public function writeInt16();
+    public function writeInt16(): string;
 
-    public function writeUInt16(?ByteOrder $byteOrder = null);
+    public function writeUInt16(?ByteOrder $byteOrder = null): string;
 
-    public function writeInt64();
+    public function writeInt64(): string;
 
-    public function writeUInt64(?ByteOrder $byteOrder = null);
+    public function writeUInt64(?ByteOrder $byteOrder = null): string;
 
-    public function writeInt32();
+    public function writeInt32(): string;
 
-    public function writeUInt32(?ByteOrder $byteOrder = null);
+    public function writeUInt32(?ByteOrder $byteOrder = null): string;
 
-    public function writeLowHexStr(int $bit);
+    public function writeLowHexStr(int $byte): string;
 
-    public function writeHighHexStr(int $bit);
+    public function writeHighHexStr(int $byte): string;
 
-    public function writeFloat(?ByteOrder $byteOrder = null);
+    public function writeFloat(?ByteOrder $byteOrder = null): string;
 
-    public function writeDouble(?ByteOrder $byteOrder = null);
+    public function writeDouble(?ByteOrder $byteOrder = null): string;
 
     /**
      * 以空格结尾的字符串.
      */
-    public function writeSpacePaddedStr(int $length): string;
+    public function writeSpacePaddedStr(int $byte): string;
 
     /**
      * 以\0结尾的字符串.
      */
-    public function writeNULLPaddedStr(int $length): string;
+    public function writeNULLPaddedStr(int $byte): string;
 }

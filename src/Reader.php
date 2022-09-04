@@ -2,35 +2,35 @@
 
 declare(strict_types=1);
 /**
- * happy coding!!!
+ * happy coding.
  */
 namespace Polynds\BinaryParse;
 
-class Reader extends BinaryParse implements Unpackable
+class Reader extends BinaryProcessor implements Unpackable
 {
     public function __construct(string $data)
     {
         parent::__construct($data);
     }
 
-    public function readInt8()
+    public function readInt8(): int
     {
-        return self::unpack('c', $this->readBytes(8));
+        return self::unpack('c', $this->readBytes());
     }
 
-    public function readUInt8()
+    public function readUInt8(): int
     {
-        return self::unpack('C', $this->readBytes(8));
+        return self::unpack('C', $this->readBytes());
     }
 
-    public function readInt16()
+    public function readInt16(): int
     {
-        return self::unpack('s', $this->readBytes(16));
+        return self::unpack('s', $this->readBytes(Binary::UNSIGNED_SHORT_LENGTH));
     }
 
-    public function readUInt16(?ByteOrder $byteOrder = null)
+    public function readUInt16(?ByteOrder $byteOrder = null): int
     {
-        $bytes = $this->readBytes(16);
+        $bytes = $this->readBytes(Binary::UNSIGNED_SHORT_LENGTH);
         if ($byteOrder->isBigEndian()) {
             $format = 'n';
         } elseif ($byteOrder->isLittleEndian()) {
@@ -42,14 +42,14 @@ class Reader extends BinaryParse implements Unpackable
         return self::unpack($format, $bytes);
     }
 
-    public function readInt64()
+    public function readInt64(): int
     {
-        return self::unpack('q', $this->readBytes(64));
+        return self::unpack('q', $this->readBytes(Binary::UNSIGNED_INT64_LENGTH));
     }
 
-    public function readUInt64(?ByteOrder $byteOrder = null)
+    public function readUInt64(?ByteOrder $byteOrder = null): int
     {
-        $bytes = $this->readBytes(64);
+        $bytes = $this->readBytes(Binary::UNSIGNED_INT64_LENGTH);
         if ($byteOrder->isBigEndian()) {
             $format = 'J';
         } elseif ($byteOrder->isLittleEndian()) {
@@ -61,14 +61,14 @@ class Reader extends BinaryParse implements Unpackable
         return self::unpack($format, $bytes);
     }
 
-    public function readInt32()
+    public function readInt32(): int
     {
-        return self::unpack('l', $this->readBytes(32));
+        return self::unpack('l', $this->readBytes(Binary::UNSIGNED_INT32_LENGTH));
     }
 
-    public function readUInt32(?ByteOrder $byteOrder = null)
+    public function readUInt32(?ByteOrder $byteOrder = null): int
     {
-        $bytes = $this->readBytes(32);
+        $bytes = $this->readBytes(Binary::UNSIGNED_INT32_LENGTH);
         if ($byteOrder->isBigEndian()) {
             $format = 'N';
         } elseif ($byteOrder->isLittleEndian()) {
@@ -80,27 +80,21 @@ class Reader extends BinaryParse implements Unpackable
         return self::unpack($format, $bytes);
     }
 
-    public function readLowHexStr(int $bit)
+    public function readLowHexStr(int $byte = Binary::UNSIGNED_CHAR_LENGTH): string
     {
-        if ($bit % 4 != 0) {
-            throw IncorrectParamException::create('the parameter bit is not a multiple of 4.');
-        }
-        $length = $bit / 4;
-        return self::unpack('h' . $length, $this->readBytes($bit));
+        $length = $byte * 2;
+        return self::unpack('h' . $length, $this->readBytes($byte));
     }
 
-    public function readHighHexStr(int $bit)
+    public function readHighHexStr(int $byte = Binary::UNSIGNED_CHAR_LENGTH): string
     {
-        if ($bit % 4 != 0) {
-            throw IncorrectParamException::create('the parameter bit is not a multiple of 4.');
-        }
-        $length = $bit / 4;
-        return self::unpack('H' . $length, $this->readBytes($bit));
+        $length = $byte * 2;
+        return self::unpack('H' . $length, $this->readBytes($byte));
     }
 
-    public function readFloat(?ByteOrder $byteOrder = null)
+    public function readFloat(?ByteOrder $byteOrder = null): float
     {
-        $bytes = $this->readBytes(32);
+        $bytes = $this->readBytes(Binary::UNSIGNED_FLOAT_LENGTH);
         if ($byteOrder->isBigEndian()) {
             $format = 'G';
         } elseif ($byteOrder->isLittleEndian()) {
@@ -112,9 +106,9 @@ class Reader extends BinaryParse implements Unpackable
         return self::unpack($format, $bytes);
     }
 
-    public function readDouble(?ByteOrder $byteOrder = null)
+    public function readDouble(?ByteOrder $byteOrder = null): float
     {
-        $bytes = $this->readBytes(64);
+        $bytes = $this->readBytes(Binary::UNSIGNED_DOUBLE_LENGTH);
         if ($byteOrder->isBigEndian()) {
             $format = 'E';
         } elseif ($byteOrder->isLittleEndian()) {
@@ -129,17 +123,17 @@ class Reader extends BinaryParse implements Unpackable
     /**
      * 以空格结尾的字符串.
      */
-    public function readSpacePaddedStr(int $length): string
+    public function readSpacePaddedStr(int $byte = 1): string
     {
-        return (string) self::unpack('a*', $this->readBytes($length));
+        return (string) self::unpack('a*', $this->readBytes($byte));
     }
 
     /**
      * 以\0结尾的字符串.
      */
-    public function readNULLPaddedStr(int $length): string
+    public function readNULLPaddedStr(int $byte = 1): string
     {
-        return (string) self::unpack('A*', $this->readBytes($length));
+        return (string) self::unpack('A*', $this->readBytes($byte));
     }
 
     protected static function unpack(string $format, string $string, int $offset = 0)
