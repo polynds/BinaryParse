@@ -1,0 +1,15 @@
+{
+    "name": "polynds/binary-parse",
+    "autoload": {
+        "psr-4": {
+            "Polynds\\BinaryParse\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kuangjian",
+            "email": "2910508410@qq.com"
+        }
+    ],
+    "require": {}
+}
