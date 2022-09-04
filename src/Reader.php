@@ -31,12 +31,13 @@ class Reader extends BinaryProcessor implements Unpackable
     public function readUInt16(?ByteOrder $byteOrder = null): int
     {
         $bytes = $this->readBytes(Binary::UNSIGNED_SHORT_LENGTH);
-        if ($byteOrder->isBigEndian()) {
-            $format = 'n';
-        } elseif ($byteOrder->isLittleEndian()) {
-            $format = 'v';
-        } else {
-            $format = 'S';
+        $format = 'S';
+        if ($byteOrder) {
+            if ($byteOrder->isBigEndian()) {
+                $format = 'n';
+            } elseif ($byteOrder->isLittleEndian()) {
+                $format = 'v';
+            }
         }
 
         return self::unpack($format, $bytes);
@@ -50,12 +51,13 @@ class Reader extends BinaryProcessor implements Unpackable
     public function readUInt64(?ByteOrder $byteOrder = null): int
     {
         $bytes = $this->readBytes(Binary::UNSIGNED_INT64_LENGTH);
-        if ($byteOrder->isBigEndian()) {
-            $format = 'J';
-        } elseif ($byteOrder->isLittleEndian()) {
-            $format = 'P';
-        } else {
-            $format = 'Q';
+        $format = 'Q';
+        if ($byteOrder) {
+            if ($byteOrder->isBigEndian()) {
+                $format = 'J';
+            } elseif ($byteOrder->isLittleEndian()) {
+                $format = 'P';
+            }
         }
 
         return self::unpack($format, $bytes);
@@ -69,12 +71,13 @@ class Reader extends BinaryProcessor implements Unpackable
     public function readUInt32(?ByteOrder $byteOrder = null): int
     {
         $bytes = $this->readBytes(Binary::UNSIGNED_INT32_LENGTH);
-        if ($byteOrder->isBigEndian()) {
-            $format = 'N';
-        } elseif ($byteOrder->isLittleEndian()) {
-            $format = 'V';
-        } else {
-            $format = 'L';
+        $format = 'L';
+        if ($byteOrder) {
+            if ($byteOrder->isBigEndian()) {
+                $format = 'N';
+            } elseif ($byteOrder->isLittleEndian()) {
+                $format = 'V';
+            }
         }
 
         return self::unpack($format, $bytes);
@@ -95,12 +98,13 @@ class Reader extends BinaryProcessor implements Unpackable
     public function readFloat(?ByteOrder $byteOrder = null): float
     {
         $bytes = $this->readBytes(Binary::UNSIGNED_FLOAT_LENGTH);
-        if ($byteOrder->isBigEndian()) {
-            $format = 'G';
-        } elseif ($byteOrder->isLittleEndian()) {
-            $format = 'g';
-        } else {
-            $format = 'f';
+        $format = 'f';
+        if ($byteOrder) {
+            if ($byteOrder->isBigEndian()) {
+                $format = 'G';
+            } elseif ($byteOrder->isLittleEndian()) {
+                $format = 'g';
+            }
         }
 
         return self::unpack($format, $bytes);
@@ -109,12 +113,13 @@ class Reader extends BinaryProcessor implements Unpackable
     public function readDouble(?ByteOrder $byteOrder = null): float
     {
         $bytes = $this->readBytes(Binary::UNSIGNED_DOUBLE_LENGTH);
-        if ($byteOrder->isBigEndian()) {
-            $format = 'E';
-        } elseif ($byteOrder->isLittleEndian()) {
-            $format = 'e';
-        } else {
-            $format = 'd';
+        $format = 'd';
+        if ($byteOrder) {
+            if ($byteOrder->isBigEndian()) {
+                $format = 'E';
+            } elseif ($byteOrder->isLittleEndian()) {
+                $format = 'e';
+            }
         }
 
         return self::unpack($format, $bytes);

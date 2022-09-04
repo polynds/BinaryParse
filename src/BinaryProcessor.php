@@ -21,6 +21,11 @@ abstract class BinaryProcessor
         $this->offset = 0;
     }
 
+    public function skip(int $byte = Binary::UNSIGNED_CHAR_LENGTH)
+    {
+        $this->readBytes($byte);
+    }
+
     protected function readBytes(int $byte = Binary::UNSIGNED_CHAR_LENGTH)
     {
         $bytes = substr($this->data, 0, $byte);
