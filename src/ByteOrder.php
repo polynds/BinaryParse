@@ -2,10 +2,22 @@
 
 declare(strict_types=1);
 /**
- * happy coding!!!
+ * happy coding.
  */
 namespace Polynds\BinaryParse;
 
+/**
+ * 网络字节序：大端序
+ * 主机字节序：根据机器实际情况，一般情况是小端序。
+ * 0x123456
+ * 高地址 --> 低地址
+ * 小端序：
+ * 低字节 <-- 高字节
+ * 12 -> 34 -> 56.
+ * 大端序：
+ * 高字节 --> 低字节
+ * 56 -> 34 -> 12.
+ */
 class ByteOrder
 {
     public const BIG_ENDIAN = 'big_endian'; // 大端序(网络字节序)
