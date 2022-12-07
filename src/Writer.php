@@ -13,75 +13,126 @@ class Writer extends BinaryProcessor implements Packable
         parent::__construct($data);
     }
 
-    public function writeInt8(): string
+    public function writeInt8($value): string
     {
-        // TODO: Implement writeInt8() method.
+        return self::pack('c',$value);
     }
 
-    public function writeUInt8(): string
+    public function writeUInt8($value): string
     {
-        // TODO: Implement writeUInt8() method.
+        return self::pack('C',$value);
     }
 
-    public function writeInt16(): string
+    public function writeInt16($value): string
     {
-        // TODO: Implement writeInt16() method.
+        return self::pack('s',$value);
     }
 
-    public function writeUInt16(?ByteOrder $byteOrder = null): string
+    public function writeUInt16($value, ?ByteOrder $byteOrder = null): string
     {
-        // TODO: Implement writeUInt16() method.
+        $format = 'S';
+        if ($byteOrder) {
+            if ($byteOrder->isBigEndian()) {
+                $format = 'n';
+            } elseif ($byteOrder->isLittleEndian()) {
+                $format = 'v';
+            }
+        }
+
+        return self::pack($format, $value);
     }
 
-    public function writeInt64(): string
+    public function writeInt64($value): string
     {
-        // TODO: Implement writeInt64() method.
+        return self::pack('q',$value);
     }
 
-    public function writeUInt64(?ByteOrder $byteOrder = null): string
+    public function writeUInt64($value, ?ByteOrder $byteOrder = null): string
     {
-        // TODO: Implement writeUInt64() method.
+        $format = 'Q';
+        if ($byteOrder) {
+            if ($byteOrder->isBigEndian()) {
+                $format = 'J';
+            } elseif ($byteOrder->isLittleEndian()) {
+                $format = 'P';
+            }
+        }
+
+        return self::pack($format, $value);
     }
 
-    public function writeInt32(): string
+    public function writeInt32($value): string
     {
-        // TODO: Implement writeInt32() method.
+        return self::pack('l',$value);
     }
 
-    public function writeUInt32(?ByteOrder $byteOrder = null): string
+    public function writeUInt32($value, ?ByteOrder $byteOrder = null): string
     {
-        // TODO: Implement writeUInt32() method.
+        $format = 'L';
+        if ($byteOrder) {
+            if ($byteOrder->isBigEndian()) {
+                $format = 'N';
+            } elseif ($byteOrder->isLittleEndian()) {
+                $format = 'V';
+            }
+        }
+
+        return self::pack($format, $value);
     }
 
-    public function writeLowHexStr(int $byte): string
+    public function writeLowHexStr($value,int $byte = Binary::UNSIGNED_CHAR_LENGTH): string
     {
-        // TODO: Implement writeLowHexStr() method.
+        $length = $byte * 2;
+        return self::pack('h' . $length, $value);
     }
 
-    public function writeHighHexStr(int $byte): string
+    public function writeHighHexStr($value,int $byte = Binary::UNSIGNED_CHAR_LENGTH): string
     {
-        // TODO: Implement writeHighHexStr() method.
+        $length = $byte * 2;
+        return self::pack('H' . $length, $value);
     }
 
-    public function writeFloat(?ByteOrder $byteOrder = null): string
+    public function writeFloat($value, ?ByteOrder $byteOrder = null): string
     {
-        // TODO: Implement writeFloat() method.
+        $format = 'f';
+        if ($byteOrder) {
+            if ($byteOrder->isBigEndian()) {
+                $format = 'G';
+            } elseif ($byteOrder->isLittleEndian()) {
+                $format = 'g';
+            }
+        }
+
+        return self::pack($format, $value);
     }
 
-    public function writeDouble(?ByteOrder $byteOrder = null): string
+    public function writeDouble($value, ?ByteOrder $byteOrder = null): string
     {
-        // TODO: Implement writeDouble() method.
+        $format = 'd';
+        if ($byteOrder) {
+            if ($byteOrder->isBigEndian()) {
+                $format = 'E';
+            } elseif ($byteOrder->isLittleEndian()) {
+                $format = 'e';
+            }
+        }
+
+        return self::pack($format, $value);
     }
 
-    public function writeSpacePaddedStr(int $byte): string
+    public function writeSpacePaddedStr($value): string
     {
-        // TODO: Implement writeSpacePaddedStr() method.
-        return '';
+        return self::pack('a*', $value);
     }
 
-    public function writeNULLPaddedStr(int $byte): string
+    public function writeNULLPaddedStr($value): string
     {
-        // TODO: Implement writeNULLPaddedStr() method.
-        return '';
+        return self::pack('A*', $value);
+    }
+
+
+    protected static function pack(string $format,...$values): string
+    {
+        return (string)pack($format, ...$values);
     }
 }

@@ -8,37 +8,37 @@ namespace Polynds\BinaryParse;
 
 interface Packable
 {
-    public function writeInt8(): string;
+    public function writeInt8($value): string;
 
-    public function writeUInt8(): string;
+    public function writeUInt8($value): string;
 
-    public function writeInt16(): string;
+    public function writeInt16($value): string;
 
-    public function writeUInt16(?ByteOrder $byteOrder = null): string;
+    public function writeUInt16($value,?ByteOrder $byteOrder = null): string;
 
-    public function writeInt64(): string;
+    public function writeInt64($value): string;
 
-    public function writeUInt64(?ByteOrder $byteOrder = null): string;
+    public function writeUInt64($value,?ByteOrder $byteOrder = null): string;
 
-    public function writeInt32(): string;
+    public function writeInt32($value): string;
 
-    public function writeUInt32(?ByteOrder $byteOrder = null): string;
+    public function writeUInt32($value,?ByteOrder $byteOrder = null): string;
 
-    public function writeLowHexStr(int $byte): string;
+    public function writeLowHexStr($value,int $byte = Binary::UNSIGNED_CHAR_LENGTH): string;
 
-    public function writeHighHexStr(int $byte): string;
+    public function writeHighHexStr($value,int $byte = Binary::UNSIGNED_CHAR_LENGTH): string;
 
-    public function writeFloat(?ByteOrder $byteOrder = null): string;
+    public function writeFloat($value,?ByteOrder $byteOrder = null): string;
 
-    public function writeDouble(?ByteOrder $byteOrder = null): string;
+    public function writeDouble($value,?ByteOrder $byteOrder = null): string;
 
     /**
      * 以空格结尾的字符串.
      */
-    public function writeSpacePaddedStr(int $byte): string;
+    public function writeSpacePaddedStr($value): string;
 
     /**
      * 以\0结尾的字符串.
      */
-    public function writeNULLPaddedStr(int $byte): string;
+    public function writeNULLPaddedStr($value): string;
 }
