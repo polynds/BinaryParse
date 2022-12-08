@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * happy coding.
+ * happy coding!!!
  */
 namespace Polynds\BinaryParse;
 
@@ -15,17 +15,17 @@ class Writer extends BinaryProcessor implements Packable
 
     public function writeInt8($value): string
     {
-        return self::pack('c',$value);
+        return self::pack('c', $value);
     }
 
     public function writeUInt8($value): string
     {
-        return self::pack('C',$value);
+        return self::pack('C', $value);
     }
 
     public function writeInt16($value): string
     {
-        return self::pack('s',$value);
+        return self::pack('s', $value);
     }
 
     public function writeUInt16($value, ?ByteOrder $byteOrder = null): string
@@ -44,7 +44,7 @@ class Writer extends BinaryProcessor implements Packable
 
     public function writeInt64($value): string
     {
-        return self::pack('q',$value);
+        return self::pack('q', $value);
     }
 
     public function writeUInt64($value, ?ByteOrder $byteOrder = null): string
@@ -63,7 +63,7 @@ class Writer extends BinaryProcessor implements Packable
 
     public function writeInt32($value): string
     {
-        return self::pack('l',$value);
+        return self::pack('l', $value);
     }
 
     public function writeUInt32($value, ?ByteOrder $byteOrder = null): string
@@ -80,13 +80,13 @@ class Writer extends BinaryProcessor implements Packable
         return self::pack($format, $value);
     }
 
-    public function writeLowHexStr($value,int $byte = Binary::UNSIGNED_CHAR_LENGTH): string
+    public function writeLowHexStr($value, int $byte = BinaryParse::UNSIGNED_CHAR_LENGTH): string
     {
         $length = $byte * 2;
         return self::pack('h' . $length, $value);
     }
 
-    public function writeHighHexStr($value,int $byte = Binary::UNSIGNED_CHAR_LENGTH): string
+    public function writeHighHexStr($value, int $byte = BinaryParse::UNSIGNED_CHAR_LENGTH): string
     {
         $length = $byte * 2;
         return self::pack('H' . $length, $value);
@@ -130,9 +130,8 @@ class Writer extends BinaryProcessor implements Packable
         return self::pack('A*', $value);
     }
 
-
-    protected static function pack(string $format,...$values): string
+    protected static function pack(string $format, ...$values): string
     {
-        return (string)pack($format, ...$values);
+        return (string) pack($format, ...$values);
     }
 }

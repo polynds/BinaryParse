@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 /**
- * happy coding.
+ * happy coding!!!
  */
 namespace Polynds\BinaryParse;
 
-class Binary
+class BinaryParse
 {
     public const UNSIGNED_CHAR_LENGTH = 1;
 

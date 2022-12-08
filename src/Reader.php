@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 /**
- * happy coding.
+ * happy coding!!!
  */
 namespace Polynds\BinaryParse;
 
-class Reader extends BinaryProcessor implements Unpackable
+class Reader extends BinaryProcessor implements UnPackable
 {
     public function __construct(string $data)
     {
@@ -25,12 +25,12 @@ class Reader extends BinaryProcessor implements Unpackable
 
     public function readInt16(): int
     {
-        return self::unpack('s', $this->readBytes(Binary::UNSIGNED_SHORT_LENGTH));
+        return self::unpack('s', $this->readBytes(BinaryParse::UNSIGNED_SHORT_LENGTH));
     }
 
     public function readUInt16(?ByteOrder $byteOrder = null): int
     {
-        $bytes = $this->readBytes(Binary::UNSIGNED_SHORT_LENGTH);
+        $bytes = $this->readBytes(BinaryParse::UNSIGNED_SHORT_LENGTH);
         $format = 'S';
         if ($byteOrder) {
             if ($byteOrder->isBigEndian()) {
@@ -45,12 +45,12 @@ class Reader extends BinaryProcessor implements Unpackable
 
     public function readInt64(): int
     {
-        return self::unpack('q', $this->readBytes(Binary::UNSIGNED_INT64_LENGTH));
+        return self::unpack('q', $this->readBytes(BinaryParse::UNSIGNED_INT64_LENGTH));
     }
 
     public function readUInt64(?ByteOrder $byteOrder = null): int
     {
-        $bytes = $this->readBytes(Binary::UNSIGNED_INT64_LENGTH);
+        $bytes = $this->readBytes(BinaryParse::UNSIGNED_INT64_LENGTH);
         $format = 'Q';
         if ($byteOrder) {
             if ($byteOrder->isBigEndian()) {
@@ -65,12 +65,12 @@ class Reader extends BinaryProcessor implements Unpackable
 
     public function readInt32(): int
     {
-        return self::unpack('l', $this->readBytes(Binary::UNSIGNED_INT32_LENGTH));
+        return self::unpack('l', $this->readBytes(BinaryParse::UNSIGNED_INT32_LENGTH));
     }
 
     public function readUInt32(?ByteOrder $byteOrder = null): int
     {
-        $bytes = $this->readBytes(Binary::UNSIGNED_INT32_LENGTH);
+        $bytes = $this->readBytes(BinaryParse::UNSIGNED_INT32_LENGTH);
         $format = 'L';
         if ($byteOrder) {
             if ($byteOrder->isBigEndian()) {
@@ -83,13 +83,13 @@ class Reader extends BinaryProcessor implements Unpackable
         return self::unpack($format, $bytes);
     }
 
-    public function readLowHexStr(int $byte = Binary::UNSIGNED_CHAR_LENGTH): string
+    public function readLowHexStr(int $byte = BinaryParse::UNSIGNED_CHAR_LENGTH): string
     {
         $length = $byte * 2;
         return self::unpack('h' . $length, $this->readBytes($byte));
     }
 
-    public function readHighHexStr(int $byte = Binary::UNSIGNED_CHAR_LENGTH): string
+    public function readHighHexStr(int $byte = BinaryParse::UNSIGNED_CHAR_LENGTH): string
     {
         $length = $byte * 2;
         return self::unpack('H' . $length, $this->readBytes($byte));
@@ -97,7 +97,7 @@ class Reader extends BinaryProcessor implements Unpackable
 
     public function readFloat(?ByteOrder $byteOrder = null): float
     {
-        $bytes = $this->readBytes(Binary::UNSIGNED_FLOAT_LENGTH);
+        $bytes = $this->readBytes(BinaryParse::UNSIGNED_FLOAT_LENGTH);
         $format = 'f';
         if ($byteOrder) {
             if ($byteOrder->isBigEndian()) {
@@ -112,7 +112,7 @@ class Reader extends BinaryProcessor implements Unpackable
 
     public function readDouble(?ByteOrder $byteOrder = null): float
     {
-        $bytes = $this->readBytes(Binary::UNSIGNED_DOUBLE_LENGTH);
+        $bytes = $this->readBytes(BinaryParse::UNSIGNED_DOUBLE_LENGTH);
         $format = 'd';
         if ($byteOrder) {
             if ($byteOrder->isBigEndian()) {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * happy coding.
+ * happy coding!!!
  */
 namespace Polynds\BinaryParse;
 
@@ -21,12 +21,12 @@ abstract class BinaryProcessor
         $this->offset = 0;
     }
 
-    public function skip(int $byte = Binary::UNSIGNED_CHAR_LENGTH)
+    public function skip(int $byte = BinaryParse::UNSIGNED_CHAR_LENGTH)
     {
         $this->readBytes($byte);
     }
 
-    protected function readBytes(int $byte = Binary::UNSIGNED_CHAR_LENGTH)
+    protected function readBytes(int $byte = BinaryParse::UNSIGNED_CHAR_LENGTH)
     {
         $bytes = substr($this->data, 0, $byte);
         $this->offset += $byte;

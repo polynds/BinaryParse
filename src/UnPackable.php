@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 /**
- * happy coding.
+ * happy coding!!!
  */
 namespace Polynds\BinaryParse;
 
-interface Unpackable
+interface UnPackable
 {
     public function readInt8(): int;
 
@@ -24,9 +24,9 @@ interface Unpackable
 
     public function readUInt32(?ByteOrder $byteOrder = null): int;
 
-    public function readLowHexStr(int $byte = Binary::UNSIGNED_CHAR_LENGTH): string;
+    public function readLowHexStr(int $byte = BinaryParse::UNSIGNED_CHAR_LENGTH): string;
 
-    public function readHighHexStr(int $byte = Binary::UNSIGNED_CHAR_LENGTH): string;
+    public function readHighHexStr(int $byte = BinaryParse::UNSIGNED_CHAR_LENGTH): string;
 
     public function readFloat(?ByteOrder $byteOrder = null): float;
 
